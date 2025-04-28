@@ -1,7 +1,10 @@
 import argparse
+import json
 import logging
 import os
+import pathlib
 from typing import Any
+from requests_toolbelt import sessions
 
 def create_dataset_draft(upload_args: "UploadArgs") -> None:
     """
@@ -10,9 +13,80 @@ def create_dataset_draft(upload_args: "UploadArgs") -> None:
     Args:
         upload_args (UploadArgs): Arguments for uploading the dataset.
     """
-    # Placeholder for the actual implementation
-    print("Creating dataset draft...")
-    pass
+    # Prepare the session
+    session = sessions.BaseUrlSession(base_url="https://dar.elter-ri.eu")
+    session.headers.update({"Authorization": f"Bearer {upload_args.token}"})
+    session.headers.update({"Content-Type": "application/json"})
+
+    # Create the dataset draft
+    with open(upload_args.metadata_path, "r") as file:
+        metadata = json.load(file)
+
+        request_object = {
+            "parent": {
+                "communities": {
+                    "default": "elter"
+                }
+            },
+            "metadata": metadata,
+            "files": {
+                "enabled": True
+            },
+            "externalWorkflow": {
+                "defaultWorkflowTemplateId": "basic-ingest"
+            },
+        }
+
+        # Send the request to create the dataset draft
+        response = session.post("/api/datasets", json=request_object)
+
+        if not response.ok:
+            logging.error(f"Failed to create dataset draft: {response.status_code} - {response.text}")
+            raise ValueError("Failed to create dataset draft.")
+
+    created_draft = response.json()
+    draft_id = created_draft["id"]
+
+    logging.info(f"Dataset draft created successfully with ID: {draft_id}")
+    # Upload the files
+
+    files_to_upload = []
+    for root, _, files in os.walk(upload_args.data_dir_path):
+        for file_name in files:
+            files_to_upload.append(pathlib.Path(os.path.join(root, file_name)))
+
+
+    if not files_to_upload:
+        logging.warning("No files found to upload.")
+        return
+
+    # Register the files for upload
+    file_registration_payload = [{
+        "key": file.name,
+    } for file in files_to_upload]
+
+    response = session.post(f"/api/datasets/{draft_id}/draft/files", json=file_registration_payload)
+    if not response.ok:
+        logging.error(f"Failed to register files for upload: {response.status_code} - {response.text}")
+        raise ValueError("Failed to register files for upload.")
+
+    # Upload file content
+    for file in files_to_upload:
+        with open(file, "rb") as file_content:
+            response = session.put(f"/api/datasets/{draft_id}/draft/files/{file.name}/content", data=file_content)
+            if not response.ok:
+                logging.error(f"Failed to upload file {file.name}: {response.status_code} - {response.text}")
+                raise ValueError(f"Failed to upload file {file.name}.")
+
+
+    # Commit uploaded files
+    for file in files_to_upload:
+        response = session.post(f"/api/datasets/{draft_id}/draft/files/{file.name}/commit")
+        if not response.ok:
+            logging.error(f"Failed to commit file {file.name}: {response.status_code} - {response.text}")
+            raise ValueError(f"Failed to commit file {file.name}.")
+
+    logging.info(f"Files uploaded and committed successfully for dataset draft ID: {draft_id}")
 
 
 def _configure_argparse_subparser(parser: argparse.ArgumentParser) -> None:
