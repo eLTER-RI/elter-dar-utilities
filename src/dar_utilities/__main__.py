@@ -1,14 +1,14 @@
 import argparse
 import logging
 
-from dar_utilities.creator import _configure_creator_subparser
+from dar_utilities.curator import _configure_creator_subparser
 
 def _prepare_parser():
     arg_parser = argparse.ArgumentParser(prog="dar_utilities", description="eLTER Data Archive and Repository (DAR) Utilities")
     subparsers = arg_parser.add_subparsers(required=True)
 
     creator_parser = subparsers.add_parser(
-        "creator",
+        "curator",
         help="Upload a dataset draft to the eLTER DAR",
     )
 

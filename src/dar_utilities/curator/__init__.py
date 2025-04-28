@@ -1,5 +1,5 @@
 import argparse
-from dar_utilities.creator.upload import _configure_argparse_subparser
+from dar_utilities.curator.upload import _configure_argparse_subparser
 
 
 def _configure_creator_subparser(parser: argparse.ArgumentParser):
