@@ -1,0 +1,164 @@
+{
+  "alternateIdentifiers": [
+    {
+      "alternateID": "https://b2share.eudat.eu",
+      "alternateIDType": "URI"
+    }
+  ],
+  "assetType": "Dataset",
+  "contactPoints": [
+    {
+      "contactEmail": "test@test.com",
+      "contactName": "Test"
+    }
+  ],
+  "contributors": [
+    {
+      "contributorAffiliation": {
+        "entityID": {
+          "entityID": "02j46qs45",
+          "entityIDSchema": "ror"
+        },
+        "entityName": "Test"
+      },
+      "contributorEmail": "example@mail.com",
+      "contributorFamilyName": "Smith",
+      "contributorGivenName": "John",
+      "contributorIDs": [
+        {
+          "entityID": "0000-0002-9227-8514",
+          "entityIDSchema": "orcid"
+        }
+      ],
+      "contributorType": "MetadataProvider"
+    }
+  ],
+  "creators": [
+    {
+      "creatorAffiliation": {
+        "entityID": {
+          "entityID": "000",
+          "entityIDSchema": "ror"
+        },
+        "entityName": "Test"
+      },
+      "creatorEmail": "test@test.com",
+      "creatorFamilyName": "TestSurname",
+      "creatorGivenName": "Test",
+      "creatorIDs": [
+        {
+          "entityID": "0000-0002-9227-8514",
+          "entityIDSchema": "orcid"
+        }
+      ]
+    }
+  ],
+  "dataLevel": {
+    "dataLevelCode": "1"
+  },
+  "datasetType": {
+    "datasetTypeCode": "SOGEO_001"
+  },
+  "descriptions": [
+    {
+      "descriptionText": "Description - Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ",
+      "descriptionType": "Abstract"
+    },
+    {
+      "descriptionText": "Additional description",
+      "descriptionType": "Other"
+    }
+  ],
+  "geoLocations": [
+    {
+      "geographicDescription": "Geo description",
+      "point": {
+        "latitude": 22.0,
+        "longitude": 44.0
+      }
+    }
+  ],
+  "habitatReferences": [
+    {
+      "soHabitatCode": "C1",
+      "soHabitatURI": ""
+    }
+  ],
+  "keywords": [
+    {
+      "keywordLabel": "Test keyword",
+      "keywordURI": "http://example.com"
+    }
+  ],
+  "language": "English",
+  "licenses": [
+    {
+      "licenseCode": "CC-BY-NC-SA-4.0",
+      "licenseURI": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    }
+  ],
+  "methods": [
+    {
+      "instrumentationDescription": "This is a test description of a sensor"
+    }
+  ],
+  "projects": [
+    {
+      "projectID": "https://cordis.europa.eu/asdasdasdasd",
+      "projectName": "eLTER"
+    }
+  ],
+  "relatedIdentifiers": [
+    {
+      "relatedID": "https://b2share.eudat.eu",
+      "relatedIDType": "DOI",
+      "relatedResourceType": "Book",
+      "relationType": "Cites"
+    }
+  ],
+  "responsibleOrganizations": [
+    {
+      "organizationEmail": "",
+      "organizationIDs": [
+        {
+          "entityID": "02j46qs45",
+          "entityIDSchema": "ror"
+        }
+      ],
+      "organizationName": "Masaryk University"
+    }
+  ],
+  "siteReferences": [
+    {
+      "siteID": "f0b67e0d-d3f0-483b-adf0-99ca7bcdcc26",
+      "siteName": "Abisko National Park - Sweden"
+    }
+  ],
+  "taxonomicCoverages": [
+    {
+      "taxonomicClassification": {
+        "taxonomicClassificationID": "",
+        "taxonomicCommonName": "",
+        "taxonomicRankName": "",
+        "taxonomicRankValue": ""
+      },
+      "taxonomicDescription": "Red fox"
+    }
+  ],
+  "temporalCoverages": [
+    {
+      "endDate": "2025-04-05",
+      "startDate": "2025-04-01"
+    }
+  ],
+  "temporalResolution": {
+    "temporalResolutionUnit": "year",
+    "temporalResolutionValue": 1
+  },
+  "titles": [
+    {
+      "titleLanguage": "English",
+      "titleText": "Title text"
+    }
+  ]
+}
