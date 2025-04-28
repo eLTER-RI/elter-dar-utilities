@@ -1,7 +1,7 @@
 import argparse
 import logging
 
-from creator import _configure_creator_subparser
+from dar_utilities.creator import _configure_creator_subparser
 
 def _prepare_parser():
     arg_parser = argparse.ArgumentParser(prog="dar_utilities", description="eLTER Data Archive and Repository (DAR) Utilities")
