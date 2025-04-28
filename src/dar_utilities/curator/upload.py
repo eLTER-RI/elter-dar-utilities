@@ -6,12 +6,16 @@ import pathlib
 from typing import Any
 from requests_toolbelt import sessions
 
-def create_dataset_draft(upload_args: "UploadArgs") -> None:
+def create_dataset_draft(upload_args: "UploadArgs") -> str:
     """
     Create a dataset draft in the eLTER DAR.
 
     Args:
         upload_args (UploadArgs): Arguments for uploading the dataset.
+    Returns:
+        str: The ID of the created dataset draft.
+    Raises:
+        ValueError: If the dataset draft creation or file upload fails.
     """
     # Prepare the session
     session = sessions.BaseUrlSession(base_url="https://dar.elter-ri.eu")
@@ -58,7 +62,7 @@ def create_dataset_draft(upload_args: "UploadArgs") -> None:
 
     if not files_to_upload:
         logging.warning("No files found to upload.")
-        return
+        return draft_id
 
     # Register the files for upload
     file_registration_payload = [{
@@ -91,6 +95,8 @@ def create_dataset_draft(upload_args: "UploadArgs") -> None:
             raise ValueError(f"Failed to commit file {file.name}.")
 
     logging.info(f"Files uploaded and committed successfully for dataset draft ID: {draft_id}")
+
+    return draft_id
 
 
 def _configure_argparse_subparser(parser: argparse.ArgumentParser) -> None:
