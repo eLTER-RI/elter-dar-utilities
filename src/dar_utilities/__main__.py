@@ -9,7 +9,7 @@ def _prepare_parser():
 
     creator_parser = subparsers.add_parser(
         "curator",
-        help="Upload a dataset draft to the eLTER DAR",
+        help="Utilities for dataset curators",
     )
 
     _configure_creator_subparser(creator_parser)
