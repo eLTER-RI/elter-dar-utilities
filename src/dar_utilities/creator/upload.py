@@ -71,9 +71,13 @@ def create_dataset_draft(upload_args: "UploadArgs") -> None:
         raise ValueError("Failed to register files for upload.")
 
     # Upload file content
+    file_upload_session = sessions.BaseUrlSession(base_url="https://dar.elter-ri.eu")
+    file_upload_session.headers.update({"Authorization": f"Bearer {upload_args.token}"})
+    file_upload_session.headers.update({"Content-Type": "application/octet-stream"})
+
     for file in files_to_upload:
         with open(file, "rb") as file_content:
-            response = session.put(f"/api/datasets/{draft_id}/draft/files/{file.name}/content", data=file_content)
+            response = file_upload_session.put(f"/api/datasets/{draft_id}/draft/files/{file.name}/content", data=file_content)
             if not response.ok:
                 logging.error(f"Failed to upload file {file.name}: {response.status_code} - {response.text}")
                 raise ValueError(f"Failed to upload file {file.name}.")
