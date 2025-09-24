@@ -1,3 +1,7 @@
+## DEPRECATED
+This utility is deprecated and will no longer be maintained. Please use the [DAR-CLI](https://github.com/eLTER-RI/dar-cli) instead.
+
+___
 # eLTER DAR utilities
 Utilities for advanced users of eLTER Data Asset Registry
 ## Installation
